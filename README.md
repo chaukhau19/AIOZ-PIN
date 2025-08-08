@@ -6,55 +6,56 @@
 
 ```bash
 ########## 1. Check Versions ##########
-node -v                           # Kiểm tra phiên bản Node.js đang cài
-npm -v                            # Kiểm tra phiên bản npm
-yarn -v                           # Kiểm tra phiên bản Yarn
-yarn playwright --version         # Kiểm tra phiên bản Playwright đã cài qua Yarn
-npm playwright --version          # Kiểm tra phiên bản Playwright nếu cài qua npm
+node -v                           # Check installed Node.js version
+npm -v                            # Check installed npm version
+yarn -v                           # Check installed Yarn version
+yarn playwright --version         # Check Playwright version installed via Yarn
+npm playwright --version          # Check Playwright version installed via npm
 
 ########## 2. Uninstall All Dependencies ##########
 # FOR LINUX / MAC / GIT BASH
-rm -rf node_modules package-lock.json yarn.lock playwright-report test-results   # Xóa toàn bộ thư viện đã cài, file lock, report và test results
+rm -rf node_modules package-lock.json yarn.lock playwright-report test-results
+# Remove all installed dependencies, lock files, reports, and test results
 
-# FOR WINDOWS PowerShell (Run one at a time)
-Remove-Item -Recurse -Force node_modules                     # Xóa thư mục node_modules
-Remove-Item -Force package-lock.json, yarn.lock              # Xóa file lock của npm và Yarn
-Remove-Item -Recurse -Force playwright-report, test-results  # Xóa report và kết quả test
+# FOR WINDOWS PowerShell (run each separately)
+Remove-Item -Recurse -Force node_modules                     # Remove node_modules folder
+Remove-Item -Force package-lock.json, yarn.lock              # Remove npm & Yarn lock files
+Remove-Item -Recurse -Force playwright-report, test-results  # Remove reports & test results
 
 ########## 3. Remove Old Playwright & Dappwright ##########
-yarn remove playwright @playwright/test @tenkeylabs/dappwright    # Gỡ bỏ các gói Playwright/Dappwright đã cài qua Yarn
-npm uninstall playwright @playwright/test @tenkeylabs/dappwright  # Gỡ bỏ các gói Playwright/Dappwright đã cài qua npm
+yarn remove playwright @playwright/test @tenkeylabs/dappwright    # Remove Playwright/Dappwright installed via Yarn
+npm uninstall playwright @playwright/test @tenkeylabs/dappwright  # Remove Playwright/Dappwright installed via npm
 
 ########## 4. Reinstall Core Tools ##########
-yarn install                 # Cài lại dependencies trong package.json (chạy khi clone project hoặc xóa node_modules)
-npm install -g yarn          # Cài Yarn toàn hệ thống (chỉ cần chạy 1 lần trên máy mới)
-yarn add esbuild --force     # Cài lại esbuild vào project, ép cài nếu có xung đột phiên bản
+yarn install                 # Reinstall dependencies from package.json (use after cloning repo or deleting node_modules)
+npm install -g yarn          # Install Yarn globally (run once on a new machine)
+yarn add esbuild --force     # Reinstall esbuild in the project, force if version conflict
 
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -   # Thêm repo Node.js 18.x (Linux)
-sudo apt install -y nodejs   # Cài Node.js trên Linux
-apt-get install -y nodejs    # Cài Node.js nếu dùng apt-get (Debian/Ubuntu)
+# Install Node.js 18.x on Linux
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+# Or (Debian/Ubuntu alternative)
+apt-get install -y nodejs
 
 ########## 5. Reinstall Playwright & Dappwright ##########
 # Install Playwright browsers
-yarn playwright install                       # Tải browser (Chromium, Firefox, WebKit) mà Playwright cần
-yarn playwright install --with-deps           # Tải browser + runtime dependencies (ffmpeg, fonts, codecs…) — dùng khi setup mới
-yarn add @playwright/test@latest @tenkeylabs/dappwright           # Cài Playwright test và Dappwright bản mới nhất
-# yarn add @playwright/test@1.48.2 @tenkeylabs/dappwright         # Cài phiên bản cũ 1.48.2 (nếu cần test với bản cũ)
+yarn playwright install                       # Download browsers (Chromium, Firefox, WebKit)
+yarn playwright install --with-deps           # Download browsers + runtime dependencies (ffmpeg, fonts, codecs…)
+yarn add @playwright/test@latest @tenkeylabs/dappwright           # Install latest Playwright Test + Dappwright
+# yarn add @playwright/test@1.48.2 @tenkeylabs/dappwright         # Install specific older version (example: 1.48.2)
 
-########## 6. Install Node and Yarn (IF NEED) ##########
-# YARN
-yarn add ethers              # Cài thư viện ethers.js để tương tác blockchain
-yarn add -D @types/node      # Cài type definitions cho Node.js (chỉ dùng cho TypeScript)
-npm install -g typescript    # Cài TypeScript toàn hệ thống (nếu code TS)
-
-# NODE
-npm install playwright axios # Cài Playwright và Axios qua npm (nếu muốn chạy bằng npm thay vì Yarn)
+########## 6. Install Node and Yarn Dependencies (IF NEEDED) ##########
+# Yarn installs
+yarn add ethers              # Install ethers.js for blockchain interaction
+yarn add -D @types/node      # Install Node.js type definitions (TypeScript only)
+npm install -g typescript    # Install TypeScript globally (if coding in TS)
+# npm installs
+npm install playwright axios # Install Playwright & Axios via npm instead of Yarn
 
 ########## 7. Fix esbuild (if needed) ##########
-npm install                         # Cài lại toàn bộ dependencies qua npm (ít dùng nếu đã dùng Yarn)
-npm install esbuild --force         # Ép cài lại esbuild qua npm nếu Yarn không fix được
-ls -l node_modules/esbuild/bin/     # Kiểm tra xem file thực thi esbuild đã có chưa
-
+npm install                         # Reinstall dependencies via npm (rarely used if using Yarn)
+npm install esbuild --force         # Force reinstall esbuild via npm if Yarn fails
+ls -l node_modules/esbuild/bin/     # Check if esbuild executable exists
 ```
 
 #######################################################################################
@@ -62,79 +63,81 @@ ls -l node_modules/esbuild/bin/     # Kiểm tra xem file thực thi esbuild đ�
 ### Part 2 - Cmd Git
 
 ```bash
-########## 1. New User (Empty local and empty repo) ##########
-# 1. Tạo folder mới và vào đó
+########## 1. New User (Empty local folder and empty GitHub repo) ##########
+# 1. Create a new folder and navigate into it
 cd AIOZ-PIN
-# 2. Khởi tạo Git local
+# 2. Initialize a local Git repository
 git init
-# 3. Kết nối tới repo GitHub
+# 3. Connect to GitHub repository
 git remote add origin https://github.com/chaukhau19/AIOZ-PIN.git
 git remote set-url origin https://github.com/chaukhau19/AIOZ-PIN.git
-# 4. (Optional) Nếu repo GitHub đã có README.md thì pull về
+# 4. (Optional) If GitHub repo already has README.md, pull it
 git pull origin main --allow-unrelated-histories
-# 5. Thêm code vào (copy hoặc tạo mới file)
+# 5. Add your project files (copy or create new files)
 # ...
-# 6. Stage file để commit
+# 6. Stage all files for commit
 git add .
-# 7. Commit
+# 7. Commit changes
 git commit -m "Initial commit - upload existing project"
-# 8. Push lên GitHub
-git push origin main        # nếu branch là main
-git push -u origin main     # set upstream
-# 9. Nếu branch local là master thì:
+# 8. Push to GitHub
+git push origin main        # if your branch is main
+git push -u origin main     # set upstream for future pushes
+# 9. If your local branch is master but remote uses main:
 git push origin main --force
 ```
+
 ```bash
 ########## 2. New User (Already have local project, want to sync to new repo) ##########
-# 1. Vào folder project đã có sẵn
-cd 
-# 2. Khởi tạo Git (nếu chưa có .git)
+# 1. Go to your existing project folder
+cd /path/to/project
+# 2. Initialize Git (only if .git does not exist)
 git init
-# 3. Kết nối tới repo GitHub
+# 3. Connect to GitHub repository
 git remote add origin https://github.com/chaukhau19/AIOZ-PIN.git
 git remote set-url origin https://github.com/chaukhau19/AIOZ-PIN.git
-# 4. Nếu repo GitHub đã có README.md thì pull về (merge histories)
+# 4. If GitHub repo already has README.md, pull it (merge histories)
 git pull origin main --allow-unrelated-histories
-# 5. Stage toàn bộ file
+# 5. Stage all files
 git add .
-# 6. Commit
+# 6. Commit changes
 git commit -m "Initial commit - upload existing project"
-# 7. Push lên GitHub
-git push origin main        # nếu branch là main
+# 7. Push to GitHub
+git push origin main        # if branch is main
 git push -u origin main
-# hoặc nếu branch local là master
+# Or if local branch is master but remote uses main
 git push origin master --force
 ```
+
 ```bash
 ########## 3. Git Common Commands ##########
-# 1. Kiểm tra remote hiện tại
+# 1. Check current remote
 git remote -v
-# 2. Xoá remote
+# 2. Remove remote
 git remote remove origin
-# 3. Kiểm tra branch hiện tại
+# 3. Check current branch
 git branch
-# 4. Đổi tên branch local
-# Nếu đang ở branch đó:
+# 4. Rename local branch
+# If you are on the branch you want to rename:
 git branch -m main
-# Nếu đổi tên branch khác:
+# Rename a different branch:
 git branch -m old_name new_name
-# 5. Xoá Git local (xoá toàn bộ history, giữ lại code)
+# 5. Delete local Git history (keep code, remove .git folder)
 rm -rf .git
-# 6. Kiểm tra lịch sử commit
+# 6. View commit history
 git log
-# 7. Xem cấu hình Git hiện tại
+# 7. View current Git configuration
 git config --list
-# 8. Chuyển branch
+# 8. Switch branch
 git checkout branch_name
-# Tạo mới branch và chuyển sang luôn
+# Create a new branch and switch to it
 git checkout -b new_branch
-# 9. Merge branch (gộp branch khác vào branch hiện tại)
+# 9. Merge another branch into current branch
 git merge other_branch
-# 10. Xem sự khác biệt chưa commit
+# 10. See unstaged changes
 git diff
-# 11. Xoá branch local
+# 11. Delete local branch
 git branch -d branch_name
-# 12. Xoá branch trên remote
+# 12. Delete branch on remote
 git push origin --delete branch_name
 ```
 
@@ -144,41 +147,41 @@ git push origin --delete branch_name
 
 ```bash
 ########## 1. Run Tests ##########
-yarn playwright test                      # Chạy toàn bộ test
-yarn playwright test example.spec.ts      # Chạy 1 file test cụ thể
-yarn playwright test -g "Test case name"  # Chạy test theo tên (regex match)
+yarn playwright test                      # Run all tests
+yarn playwright test example.spec.ts      # Run a specific test file
+yarn playwright test -g "Test case name"  # Run tests matching name (regex search)
 
 ########## 2. Run With Browser UI ##########
-yarn playwright test --headed             # Chạy test có hiển thị browser UI
-yarn playwright test --browser=chromium   # Chạy chỉ với Chromium
-yarn playwright test --browser=firefox    # Chạy chỉ với Firefox
-yarn playwright test --browser=webkit     # Chạy chỉ với WebKit
+yarn playwright test --headed             # Run tests with browser UI visible
+yarn playwright test --browser=chromium   # Run tests only in Chromium
+yarn playwright test --browser=firefox    # Run tests only in Firefox
+yarn playwright test --browser=webkit     # Run tests only in WebKit
 
 ########## 3. Debug Tests ##########
-yarn playwright test --debug              # Mở Playwright Inspector để debug
-yarn playwright test --trace on           # Luôn bật trace
-yarn playwright show-trace trace.zip      # Xem file trace đã lưu
+yarn playwright test --debug              # Open Playwright Inspector for debugging
+yarn playwright test --trace on           # Always enable trace recording
+yarn playwright show-trace trace.zip      # View a saved trace file
 
 ########## 4. Record New Test ##########
-yarn playwright codegen                   # Mở trình ghi thao tác (codegen)
-yarn playwright codegen https://example.com
+yarn playwright codegen                   # Open code generator to record actions
+yarn playwright codegen https://example.com  # Start recording at a given URL
 
 ########## 5. View Reports ##########
-yarn playwright show-report               # Mở HTML report sau khi test
-yarn playwright test --reporter=list      # Chạy với reporter list
-yarn playwright test --reporter=html      # Chạy và xuất HTML report
+yarn playwright show-report               # Open the HTML report after test run
+yarn playwright test --reporter=list      # Run tests with "list" reporter
+yarn playwright test --reporter=html      # Run tests and generate HTML report
 
 ########## 6. Install / Update Browsers ##########
-yarn playwright install                   # Tải Chromium, Firefox, WebKit
-yarn playwright install --with-deps       # Tải browsers + dependencies (Linux mới setup)
-yarn playwright install chromium          # Chỉ cài Chromium
-yarn playwright install firefox           # Chỉ cài Firefox
-yarn playwright install webkit            # Chỉ cài WebKit
+yarn playwright install                   # Install Chromium, Firefox, and WebKit
+yarn playwright install --with-deps       # Install browsers + runtime dependencies (Linux fresh setup)
+yarn playwright install chromium          # Install only Chromium
+yarn playwright install firefox           # Install only Firefox
+yarn playwright install webkit            # Install only WebKit
 
 ########## 7. Misc Useful Commands ##########
-yarn playwright --version                 # Kiểm tra phiên bản Playwright
-yarn add @playwright/test@latest          # Cài/Update Playwright Test
-yarn add -D @playwright/test              # Cài Playwright Test dạng devDependencies
+yarn playwright --version                 # Check Playwright version
+yarn add @playwright/test@latest          # Install or update Playwright Test to latest
+yarn add -D @playwright/test               # Install Playwright Test as devDependency
 ```
 
 #######################################################################################
