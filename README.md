@@ -191,41 +191,41 @@ yarn add -D @playwright/test               # Install Playwright Test as devDepen
 ```bash 
 AIOZ-PIN/
 │
-├── Data/                         # Test data
-│   ├── Common.js
+├── CustomLibs/                  # Custom utility libraries to extend Playwright capabilities
+│   ├── Csv.js                   # Handles reading/writing CSV files
+│   ├── Excel.js                 # Handles reading/writing Excel files
+│   ├── ReadDataExcel.js         # Fetches and parses test data from Excel sheets
+│   ├── SendEmail.js             # Sends automated test reports via email
 │
-├── Pages/                     # API handler functions for each module
-│   ├── 1_Dapps/
-│   │   ├── 01_CoinBase
-│   │   │  ├── CoinBase.js
-│   │   ├── 02_MetaMask
-│   │   │  ├── MetaMask.js
-│   │   ├── SetupCoinBase.js
-│   │   ├── SetupMetaMask.js
-│   ├── 2_Files/
-│   │   ├── 01_Valid_2_Files
-│   │   │  ├── Files.js
-│   │   ├── 02_Invalid_2_Files
-│   │   │  ├── Files.js
-│   ├── Functions.js
+├── Data/                        # Centralized test data for all modules
+│   ├── Common.js                # Shared/global constants and variables
+│   ├── DappsData.js             # Test data for Dapps module
+│   ├── FilesData.js             # Test data for Files module
 │
-├── Tests/                        # Test cases
-│   ├── 1_Dapps/
-│   │   ├── 01_CoinBase
-│   │   │  ├── CoinBase.spec.js
-│   │   ├── 02_MetaMask
-│   │   │  ├── MetaMask.spec.js
-│   ├── 2_Files/
-│   │   ├── 01_Valid_2_Files
-│   │   │  ├── Files.spec.js
-│   │   ├── 02_Invalid_2_Files
-│   │   │  ├── Files.spec.js
-│   
-├── SendEmail.spec.js         # Calls email sending function from CustomLibs
-├── AIOZ_PIN.bat               # Quick launch script for Windows
-├── playwright.config.js           # Playwright configuration file
-├── package.json
-└── README.md
+├── Pages/                       # API handler functions and reusable actions
+│   ├── Dapps/                   # API interaction scripts for Dapps
+│   │   ├── CoinBase.js          # Coinbase-specific API handlers
+│   │   ├── MetaMask.js          # MetaMask-specific API handlers
+│   │   ├── SetupCoinBase.js     # Pre-test setup for Coinbase
+│   │   ├── SetupMetaMask.js     # Pre-test setup for MetaMask
+│   ├── Files/                   # API interaction scripts for Files
+│   │   ├── FilesValid.js        # Valid Files scenarios
+│   │   ├── FilesInvalid.js      # Invalid Files scenarios
+│   ├── Functions.js             # Common reusable functions across modules
+│
+├── Tests/                       # Organized test cases
+│   ├── Dapps/                   
+│   │   ├── CoinBase.spec.js      # Test cases for Coinbase integration
+│   │   ├── MetaMask.spec.js      # Test cases for MetaMask integration
+│   ├── Files/
+│   │   ├── FilesValid.spec.js    # Valid test cases for Files
+│   │   ├── FilesInvalid.spec.js  # Invalid test cases for Files
+│
+├── SendEmail.spec.js             # Standalone test to send email reports
+├── AIOZ_PIN.bat                  # Quick launch script for Windows
+├── playwright.config.js          # Playwright global configuration
+├── package.json                  # Project dependencies and scripts
+└── README.md                     # Project documentation
 ```
 
 #######################################################################################
