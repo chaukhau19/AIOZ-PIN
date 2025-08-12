@@ -186,7 +186,51 @@ yarn add -D @playwright/test               # Install Playwright Test as devDepen
 
 #######################################################################################
 
-### Part 4 - Error Jenkins and Fix
+### Part 4 - Source Folder
+
+```bash 
+AIOZ-PIN/
+│
+├── Data/                         # Test data
+│   ├── Common.js
+│
+├── Pages/                     # API handler functions for each module
+│   ├── 1_Dapps/
+│   │   ├── 01_CoinBase
+│   │   │  ├── CoinBase.js
+│   │   ├── 02_MetaMask
+│   │   │  ├── MetaMask.js
+│   │   ├── SetupCoinBase.js
+│   │   ├── SetupMetaMask.js
+│   ├── 2_Files/
+│   │   ├── 01_Valid_2_Files
+│   │   │  ├── Files.js
+│   │   ├── 02_Invalid_2_Files
+│   │   │  ├── Files.js
+│   ├── Functions.js
+│
+├── Tests/                        # Test cases
+│   ├── 1_Dapps/
+│   │   ├── 01_CoinBase
+│   │   │  ├── CoinBase.spec.js
+│   │   ├── 02_MetaMask
+│   │   │  ├── MetaMask.spec.js
+│   ├── 2_Files/
+│   │   ├── 01_Valid_2_Files
+│   │   │  ├── Files.spec.js
+│   │   ├── 02_Invalid_2_Files
+│   │   │  ├── Files.spec.js
+│   
+├── SendEmail.spec.js         # Calls email sending function from CustomLibs
+├── AIOZ_PIN.bat               # Quick launch script for Windows
+├── playwright.config.js           # Playwright configuration file
+├── package.json
+└── README.md
+```
+
+#######################################################################################
+
+### Part 5 - Error Jenkins and Fix
 
 ```bash
 # ERROR:
